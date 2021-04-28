@@ -36,6 +36,12 @@ body {
   background-size: cover;
 }
 
+.home-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 420px) {
   #home-container-jumbotron {
     margin-top: 2em;
@@ -47,10 +53,6 @@ body {
   border-radius: 10px;
   padding: 2em;
   color: white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 #sticky-footer {
