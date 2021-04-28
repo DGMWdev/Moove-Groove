@@ -17,6 +17,7 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = Activity.new(activity_params)
+    @activity.user = User.first
     if @activity.save
       flash[:notice] = "Activity created successfully"
       redirect_to activity_path(@activity)
