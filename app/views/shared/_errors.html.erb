@@ -1,9 +1,9 @@
-<% if @activity.errors.any? %>
+<% if obj.errors.any? %>
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <h4 class="alert-heading">These errors prevented you from creating a new activity:</h4>
     <hr>
     <ul>
-      <% @activity.errors.full_messages.each do |msg| %>
+      <% obj.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>
