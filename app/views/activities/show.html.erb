@@ -1,7 +1,25 @@
-<h1>Showing article details</h1>
-<p><strong>Title: <%= @activity.title %> </p>
-<p><strong>Description: <%= @activity.description %> </p>
+<h2 class="text-center mt-4 text-white"><%= @activity.title %></h2>
 
-<%= link_to 'Edit', edit_activity_path(@activity) %> |
-<%= link_to 'Delete', activity_path(@activity), method: :delete, data: { confirm: "Are you sure?"} %> |
-<%= link_to 'Return', activities_path(@activity) %>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-8 mt-4">
+            <div class="card text-center shadow mb-5 bg-white rounded">
+                <div class="card-header font-italic">
+                    by Dylan Wanten
+                </div>
+                <div class="card-body">
+                    <div class="card-text text-left"><%= simple_format(@activity.description) %></div>
+                        <%= link_to "", edit_activity_path(@activity), class:"btn btn-outline-info far fa-edit"%>
+                        <%= link_to "", activity_path(@activity), class:"btn btn-outline-danger far fa-trash-alt", method: :delete, data: { confirm: "Are you sure?" }%>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <small>
+                            Created <%= time_ago_in_words(@activity.created_at) %> ago,
+                            edited <%= time_ago_in_words(@activity.updated_at) %> ago
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
