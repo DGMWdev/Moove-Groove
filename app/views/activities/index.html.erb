@@ -1,32 +1,6 @@
 <div id="page-content">
 <h1 class="text-center mt-4 text-white">Dashboard</h1>
-
-<div class="container">
-    <% @activities.each do |activity| %>
-        <div class="row justify-content-md-center">
-            <div class="col-8 mt-4">
-                <div class="card text-center shadow mb-5 bg-white rounded">
-                    <div class="card-header font-italic">
-                        by <%= activity.user.username %>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title"><%= link_to activity.title, activity_path(activity), class:"text-success" %></h5>
-                        <p class="card-text"><%= truncate(activity.description, lenght: 25) %></p>
-                        <%= link_to "", activity_path(activity), class:"btn btn-outline-success fas fa-eye"%>
-                        <%= link_to "", edit_activity_path(activity), class:"btn btn-outline-info far fa-edit"%>
-                        <%= link_to "", activity_path(activity), class:"btn btn-outline-danger far fa-trash-alt", method: :delete, data: { confirm: "Are you sure?" }%>
-                    </div>
-                    <div class="card-footer text-muted">
-                        <small>
-                            Created <%= time_ago_in_words(activity.created_at) %> ago,
-                            edited <%= time_ago_in_words(activity.updated_at) %> ago
-                        </small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <% end %>
-</div>
+<%=  render 'activity'%>
 </div>
 
 
