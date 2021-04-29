@@ -1,11 +1,13 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
-  
+  before_action :require_user, except: [:show, :index]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
+
   def show    
   end
 
   def index
-    @activities = Activity.all 
+    @activities = Activity.paginate(page: params[:page], per_page: 6)
   end
 
   def new
@@ -17,7 +19,7 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = Activity.new(activity_params)
-    @activity.user = User.first
+    @activity.user = current_user
     if @activity.save
       flash[:notice] = "Activity created successfully"
       redirect_to activity_path(@activity)
@@ -50,4 +52,10 @@ class ActivitiesController < ApplicationController
     params.require(:activity).permit(:title, :description)
   end
 
+  def require_same_user
+    if current_user != @activity.user && !current_user.admin?
+      flash[:alert] = "You can only alter your own activities"
+      redirect_to @activity
+    end
+  end
 end

@@ -13,16 +13,35 @@
           Activities
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <% if logged_in? %>
           <%= link_to "Create new activity", new_activity_path, class:"dropdown-item"%>
           <%= link_to "View activities", activities_path, class:"dropdown-item"%>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <% end %>
+          <a class="dropdown-item" href="#">View current users activities</a>
         </div>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn my-2 my-sm-0 logreg" type="submit">Register</button>
-      <button class="btn my-2 my-sm-0 logreg" type="submit">Log in</button>
+      <% if logged_in? %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle btn my-2 my-sm-0 logreg" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= "(Admin)" if current_user.admin? %> Profile [<%= current_user.username %>]
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        
+          <%= link_to "View your profile", user_path(current_user), class:"dropdown-item"%>
+          <%= link_to "Edit your profile", edit_user_path(current_user), class:"dropdown-item"%>
+          <div class="dropdown-divider"></div>
+          <%= link_to 'Log Out', logout_path, method: :delete, class: "btn my-2 my-sm-0 logreg dropdown-item"%>
+          <%= link_to 'Delete Account', user_path(current_user), method: :delete, class: "dropdown-item text-danger btn my-2 my-sm-0 logreg", data: { confirm: "Are you sure?" } %>
+        </div>
+      </li>
+        
+      <% else %>
+        <%= link_to 'Register', signup_path, class: "btn my-2 my-sm-0 logreg"%>
+        <%= link_to 'Log in', login_path, class: "btn my-2 my-sm-0 logreg"%>
+      <% end %>
     </form>
   </div>
 </nav>

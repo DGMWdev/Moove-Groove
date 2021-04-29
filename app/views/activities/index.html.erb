@@ -1,6 +1,9 @@
 <div id="page-content">
 <h1 class="text-center mt-4 text-white">Dashboard</h1>
 <%=  render 'activity'%>
+<div class="apple_pagination">
+    <%= will_paginate @activities, :container => false %>
+</div>
 </div>
 
 
