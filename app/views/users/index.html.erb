@@ -18,7 +18,10 @@
                                 <%= link_to "Edit profile", edit_user_path(user), class:"btn btn-outline-info far fa-edit"%>
                             <% end %>
                             <% if current_user.admin? %>
-                                <%= link_to "Delete user", user_path(user), class:"btn btn-outline-danger", method: :delete, data: {confirm : "Are you sure you want to deleted this user and all its activities associated?"}%>
+                                <%= link_to "Delete user", user_path(user), class:"btn btn-outline-danger", method: :delete,
+                                data: {confirm: "Are you sure you want to deleted this user and all its activities associated?"}
+                                %>
+                            <% end %>
                         <% end %>
                     </div>
                     <div class="card-footer text-muted">
