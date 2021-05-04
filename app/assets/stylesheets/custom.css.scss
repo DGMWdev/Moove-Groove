@@ -1,5 +1,13 @@
 @import "bootstrap/dist/css/bootstrap";
 
+.pink-bg {
+  background-color: rgba(209, 0, 112, 0.8) !important;
+}
+
+.yellow-bg {
+  background-color: #dcff2e;
+}
+
 html,
 body {
   height: 100%;
@@ -42,9 +50,30 @@ body {
   align-items: center;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 825px) {
   #home-container-jumbotron {
     margin-top: 2em;
+  }
+
+  #form-container {
+    margin: 2em 0;
+  }
+}
+
+.idk {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 991px) {
+  #activities-button {
+    background-color: rgba(209, 0, 112, 1);
+    color: white;
+    margin: 0.7em 0.7em;
+    text-align: center;
+    border-radius: 4px;
   }
 }
 
@@ -69,38 +98,44 @@ body {
 .social-media:hover {
   text-decoration: none;
 }
+#txt {
+  color: #adadad;
+}
+
 /* pagination*/
 .apple_pagination {
-  background: #f1f1f1;
-  border: 1px solid #e5e5e5;
+  background-color: rgba(255, 255, 255, 0);
   text-align: center;
   padding: 1em;
   cursor: default;
 }
+
 .apple_pagination a,
 .apple_pagination span {
   padding: 0.2em 0.3em;
 }
+
 .apple_pagination .disabled {
-  color: #aaaaaa;
+  color: white;
 }
+
 .apple_pagination .current {
   font-style: normal;
   font-weight: bold;
-  background-color: #bebebe;
+  background-color: white;
   display: inline-block;
   width: 1.4em;
   height: 1.4em;
   line-height: 1.5;
-  -moz-border-radius: 1em;
-  -webkit-border-radius: 1em;
-  border-radius: 1em;
+  border-radius: 180px;
   text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 1px;
 }
+
 .apple_pagination a {
   text-decoration: none;
-  color: black;
+  color: white;
 }
+
 .apple_pagination a:hover,
 .apple_pagination a:focus {
   text-decoration: underline;

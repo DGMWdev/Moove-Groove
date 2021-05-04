@@ -6,10 +6,7 @@
         <%= link_to 'Edit your profile', edit_user_path(@user), class: 'btn btn-outline-info far fa-edit'%>
     </div>
     <% end %>
-    <h3 class="text-center mt-4 text-white">Activities</h3>
-    <div class="apple_pagination">
-    <%= will_paginate @activities, :container => false %>
+    <h3 class="text-center mt-4 text-white"><%= pluralize(current_user.activities.count, "activity") %></h3>
 </div>
-    <%=  render 'activities/activity' %>
-    
-</div>
+
+

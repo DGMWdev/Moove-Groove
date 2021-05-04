@@ -7,7 +7,8 @@ class ActivitiesController < ApplicationController
   end
 
   def index
-    @activities = Activity.paginate(page: params[:page], per_page: 6)
+    # @activities = Activity.paginate(page: params[:page], per_page: 6)
+    @activities = current_user.activities.paginate(page: params[:page], per_page: 6)
   end
 
   def new
@@ -21,8 +22,7 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
     @activity.user = current_user
     if @activity.save
-      flash[:notice] = "Activity created successfully"
-      redirect_to activity_path(@activity)
+      redirect_to activity_path(@activity), success: "Activity created successfully"
     else
       render 'new'
     end
@@ -30,8 +30,7 @@ class ActivitiesController < ApplicationController
 
   def update
     if @activity.update(activity_params)
-      flash[:notice] = "Activity updated successfully"
-      redirect_to @activity
+      redirect_to @activity, success: "Activity updated successfully"
     else
       render 'edit'
     end
@@ -43,7 +42,6 @@ class ActivitiesController < ApplicationController
   end
 
   private
-
   def set_activity
     @activity = Activity.find(params[:id])
   end
@@ -54,8 +52,8 @@ class ActivitiesController < ApplicationController
 
   def require_same_user
     if current_user != @activity.user && !current_user.admin?
-      flash[:alert] = "You can only alter your own activities"
-      redirect_to @activity
+      redirect_to @activity, info: "You can only alter your own activities"
     end
   end
+
 end

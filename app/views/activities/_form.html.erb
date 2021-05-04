@@ -1,8 +1,12 @@
-<div class="container">
+<div class="container mt-4" id='form-container'>
   <div class="row justify-content-center">
     <div class="col-10">
       <%= render 'shared/errors', obj: @activity%>
-      <%= form_with(model: @activity, class:"shadow p-3 mb-3 bg-info rounded", local: true) do |f| %>
+      <%= form_with(model: @activity, class:"shadow p-3 pink-bg rounded ", local: true) do |f| %>
+        <div class="text-center mt-4 text-white">
+          <%= f.label(@activity.new_record? ? "Create a new activity" : "Edit your activity", class:"mb-3 display-4") %>
+        </div>
+        
         <div class="form-group row">
           <%= f.label :title, class:"col-2 col-form-label text-light" %>
           <div class="col-10">
@@ -21,7 +25,10 @@
       <% end %>
     </div>
     <div class="mb-3">
-      <%= link_to '[ Cancel and return to activities listing ]', activities_path(@activity), class:"text-info" %>
+      <%= link_to '[ Cancel and return to activities listing ]', activities_path(@activity), class:"text-white" %>
     </div>
   </div>
 </div>
+
+
+

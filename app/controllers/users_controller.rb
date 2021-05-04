@@ -16,14 +16,11 @@ class UsersController < ApplicationController
     end
 
     def edit
-       
     end
 
     def update
-      
       if @user.update(user_params)
-        flash[:notice] = "Your account information has been updated"
-        redirect_to @user
+        redirect_to @user, success: "Your informations have been updated."
       else
         render 'edit'
       end
@@ -33,8 +30,7 @@ class UsersController < ApplicationController
       @user = User.new(user_params)
       if @user.save
         session[:user_id] = @user.id
-        flash[:notice] ="Welcome #{@user.username}, you have successfully signed up!"
-        redirect_to activities_path
+        redirect_to activities_path, success: "Welcome #{@user.username}, you have successfully signed up!"
       else
         render 'new'
       end
@@ -44,7 +40,7 @@ class UsersController < ApplicationController
       @user.destroy
       session[:user_id] = nil if @user == current_user
       flash[:notice] = "Account and all activities successfully deleted"
-      redirect_to signup_path
+      redirect_to root_path
     end
 
     private
@@ -63,4 +59,5 @@ class UsersController < ApplicationController
         redirect_to @user
       end
     end
+    
 end

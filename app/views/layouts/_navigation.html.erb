@@ -1,47 +1,46 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
-  <%= link_to "Groove and Moove", root_path, class: "navbar-brand", id:"logo"%>
+  <%= link_to "Groove and Moove", root_path, class: "navbar-brand", id:"logo" %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="about">About</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Activities
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <% if logged_in? %>
-          <%= link_to "Create new activity", new_activity_path, class:"dropdown-item"%>
-          <%= link_to "View activities", activities_path, class:"dropdown-item"%>
-          <div class="dropdown-divider"></div>
-          <% end %>
-          <a class="dropdown-item" href="#">View current users activities</a>
-        </div>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
       <% if logged_in? %>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle btn my-2 my-sm-0 logreg" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= "(Admin)" if current_user.admin? %> Profile [<%= current_user.username %>]
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        
-          <%= link_to "View your profile", user_path(current_user), class:"dropdown-item"%>
-          <%= link_to "Edit your profile", edit_user_path(current_user), class:"dropdown-item"%>
-          <div class="dropdown-divider"></div>
-          <%= link_to 'Log Out', logout_path, method: :delete, class: "btn my-2 my-sm-0 logreg dropdown-item"%>
-          <%= link_to 'Delete Account', user_path(current_user), method: :delete, class: "dropdown-item text-danger btn my-2 my-sm-0 logreg", data: { confirm: "Are you sure?" } %>
-        </div>
-      </li>
-        
+        <li class="nav-item dropdown" id="activities-button">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Activities
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Create new activity", new_activity_path, class:"dropdown-item"%>
+            <%= link_to "View activities", activities_path, class:"dropdown-item"%>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    <ul class="navbar-nav ">
+      <% if logged_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle btn my-0 my-sm-0 logreg" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <% if logged_in? && current_user.admin? %>
+              <%= "[Admin]"%> <%= current_user.username %>
+            <% else %>
+              <%= "[Regular User]"%> <%= current_user.username %>
+            <% end %>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "View your profile", user_path(current_user), class:"dropdown-item"%>
+            <%= link_to "Edit your profile", edit_user_path(current_user), class:"dropdown-item"%>
+            <div class="dropdown-divider"></div>
+            <%= link_to 'Log Out', logout_path, method: :delete, class: "dropdown-item"%>
+            <%= link_to 'Delete Account', user_path(current_user), method: :delete, class: "dropdown-item text-danger", data: { confirm: "Are you sure?" } %>
+          </div>
+        </li>
       <% else %>
         <%= link_to 'Register', signup_path, class: "btn my-2 my-sm-0 logreg"%>
         <%= link_to 'Log in', login_path, class: "btn my-2 my-sm-0 logreg"%>
       <% end %>
-    </form>
+    </ul>
   </div>
 </nav>
+
+
