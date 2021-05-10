@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   end
 
   def about
+    redirect_to root_path, notice: "No about page found"
   end
   
 end

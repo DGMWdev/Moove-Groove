@@ -1,12 +1,44 @@
 <div id="page-content">
-    <h1 class="text-center mt-4 text-white"><%= @user.username %>'s profile</h1>
-    <%= gravatar_for @user, size: 200 %>
-    <% if logged_in? && @user == current_user%>
-    <div class="text-center mt-4">
-        <%= link_to 'Edit your profile', edit_user_path(@user), class: 'btn btn-outline-info far fa-edit'%>
+    <div class="container mt-5">
+        <div class="row-xs-6 justify-content-center">
+            <div class="card text-center shadow mb-5 pink-bg">
+                <div class="card-header">
+                    <% if current_user.admin? %>
+                        <h1 class="text-center mt-4 text-white"><%= @user.username %>'s profile</h1>
+                    <% else %>
+                        <h1 class="text-center mt-4 text-white">Your profile</h1>
+                    <% end %>
+                    <% if @user.avatar.attached? %>
+                        <image src="<%=(url_for(@user.avatar))%>", style="height:100px; width:100px; border-radius:180px">
+                    <% else %>
+                        <%= gravatar_for @user, size: 100 %>
+                    <% end %>
+                    <p class="text-center mt-4 text-white"><%= @user.gender %></p>
+                    <h3 class="text-center mt-4 text-white"><%= pluralize(@user.activities.count, "activity") %></h3>
+                    <p><%= link_to "" , activities_path, class:"btn btn-light fas fa-eye"%></p>
+                    <p class="text-center mt-4 text-white font-italic">"<%= @user.bio %>"</p>
+                    <h6 class="text-left mt-4 text-white">Full name: <br/><%= @user.firstname %>  <%= current_user.lastname %></h6>
+                    <p class="text-left mt-4 text-white">Email for connexion: <br/><%= @user.email %></p>
+                </div>
+                <div class="card-body">
+                    <% if logged_in? %>
+                        <% if ( @user == current_user ) %>
+                            <%= link_to "", edit_user_path(@user), class:"btn  btn-light far fa-edit "%>
+                            <%= link_to "", user_path(@user), class:"btn btn-light far fa-trash-alt", method: :delete, data: {confirm: "Are you sure you want to delete you account and all its activities associated?"} %>
+                        <% end %>
+                        <% if current_user.admin? %>
+                            <%= link_to "Delete user", user_path(@user), class:"btn btn-danger ", method: :delete, data: {confirm: "Are you sure you want to delete this user and all its activities associated?"} %>
+                        <% end %>
+                    <% end %>
+                </div>
+                <div class="card-footer text-white">
+                    <small>
+                        Joined <%= time_ago_in_words(@user.created_at) %> ago
+                    </small>
+                </div>
+            </div>
+        </div>
     </div>
-    <% end %>
-    <h3 class="text-center mt-4 text-white"><%= pluralize(current_user.activities.count, "activity") %></h3>
 </div>
 
 

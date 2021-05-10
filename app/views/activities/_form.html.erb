@@ -1,26 +1,76 @@
 <div class="container mt-4" id='form-container'>
   <div class="row justify-content-center">
-    <div class="col-10">
+    <div class="col-lg-10">
       <%= render 'shared/errors', obj: @activity%>
       <%= form_with(model: @activity, class:"shadow p-3 pink-bg rounded ", local: true) do |f| %>
         <div class="text-center mt-4 text-white">
           <%= f.label(@activity.new_record? ? "Create a new activity" : "Edit your activity", class:"mb-3 display-4") %>
         </div>
-        
+        <div class="form-group row">
+          <%= f.label :name, class:"col-2 col-form-label text-light" %>
+          <div class="col-lg-10">
+            <%= f.select :name, [
+                                  ["Running"],
+                                  ["Walking"],
+                                  ["Cycling"], 
+                                  ["Swimming"], 
+                                  ["Elliptical"], 
+                                  ["Strenght Training"], 
+                                  ["Circuit Training"], 
+                                  ["Core Strength"],
+                                  ["Arc Trainer"],
+                                  ["Rowing"],
+                                  ["Hiking"],
+                                  ["Biking"],
+                                  ["Skating"],
+                                ], 
+            prompt: 'Please select an activity' %>
+          </div>
+        </div>
+        <div class="form-group row">
+              <%= f.label :avatar, "Photo", class:"col-2 col-form-label text-light" %>
+           <div class="col-lg-10">
+              <%= f.file_field :avatar, class: "form-control" %>
+           </div>
+         </div>
         <div class="form-group row">
           <%= f.label :title, class:"col-2 col-form-label text-light" %>
-          <div class="col-10">
+          <div class="col-lg-10">
             <%= f.text_field :title, class:"form-control shadow rounded", placeholder:'Name of the activity'%>
           </div>
         </div>
         <div class="form-group row">
           <%= f.label :description, class:"col-2 col-form-label text-light" %>
-          <div class="col-10">
-            <%= f.text_area :description, rows: 10, class:"form-control shadow rounded", placeholder:'Description of the activity'%>
+          <div class="col-lg-10">
+            <%= f.text_area :description, class:"form-control shadow rounded", placeholder:'Description of the activity'%>
           </div>
         </div>
+        <div class="form-group row">
+              <%= f.label :duration, class:"col-2 col-form-label text-light" %>
+           <div class="col-lg-10">
+              <%= f.number_field :duration, class: "form-control shadow rounded", placeholder: "in minutes", id: "duration" %>
+           </div>
+         </div>
+         <div class="form-group row">
+            <%= f.label :repetitions, class:"col-2 col-form-label text-light" %>
+          <div class="col-lg-10">
+            <%= f.number_field :repetitions, class: "form-control shadow rounded", placeholder: "00", id: "repetition" %>
+          </div>
+        </div>
+        <div class="form-group row">
+            <%= f.label :distance, 'Distance (KM)', class:"col-2 col-form-label text-light" %>
+          <div class="col-lg-10">
+            <%= f.number_field :distance, class: "form-control shadow rounded", placeholder: "00", id: "distance" %>
+          </div>
+        </div>
+        <div class="form-group row">
+        <%= f.label :date, class:"col-2 col-form-label text-light"  %>
+           <div class="col-lg-10">
+              <%= f.date_field :date, class: "form-control shadow rounded", required: true, id: "date" %>
+           </div>
+         </div>
         <div class="form-group row justify-content-center">
-          <%= f.submit class:"btn btn-outline-light btn-lg"%>
+          <%= f.submit class:"btn btn-lg", :style => "background-color:#DCFF2E", color: "black"%>
         </div>
       <% end %>
     </div>

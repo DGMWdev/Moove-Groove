@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
     before_action :set_user, only: [:show, :edit, :update, :destroy]
-    before_action :require_user, only: [:edit, :update]
+    before_action :require_user, only: [:edit, :update, :index]
     before_action :require_same_user, only: [:edit, :update, :destroy]
+    before_action :require_admin_user, only: [:index]
     
     def show
-      @activities = @user.activities.paginate(page: params[:page], per_page: 6)
+        @activities = @user.activities.paginate(page: params[:page], per_page: 6) 
     end
 
     def new
@@ -15,7 +16,7 @@ class UsersController < ApplicationController
       @users = User.paginate(page: params[:page], per_page: 6)
     end
 
-    def edit
+    def edit  
     end
 
     def update
@@ -46,7 +47,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-      params.require(:user).permit(:username, :email, :password)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :firstname, :lastname, :bio, :avatar, :gender)
     end
 
     def set_user
@@ -57,6 +58,13 @@ class UsersController < ApplicationController
       if current_user != @user && !current_user.admin?
         flash[:alert] = "You can only alter your own profile"
         redirect_to @user
+      end
+    end
+
+    def require_admin_user
+      if current_user != @user && !current_user.admin?
+        flash[:alert] = "Access reserved to admin users"
+        redirect_to current_user
       end
     end
     

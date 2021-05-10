@@ -1,3 +1,33 @@
 <div id="page-content" class='home-content'>
-    <%= render 'form' %>
+    <div class="container" id='form-container'>
+  <div class="row justify-content-center">
+    <div class="col col-lg-8">
+      <%= render 'shared/errors', obj: @user %>
+      <%= form_with(model: @user, class:"shadow p-3 pink-bg rounded display-4", local: true) do |f| %>
+      <div class="text-center mt-4 text-white">
+      <%= f.label(@user.new_record? ? "Create a new account" : "Edit your account", class:"mb-3") %>
+      </div>
+        <div class="form-group row">
+          <div class="col">
+            <%= f.text_field :username, class:"form-control shadow rounded", placeholder:'Enter a username'%>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col">
+            <%= f.email_field :email, class:"form-control shadow rounded", placeholder:'Enter your email adress'%>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col">
+            <%= f.password_field :password, class:"form-control shadow rounded", placeholder:'Choose a password'%>
+            <%=f.password_field :password_confirmation, class:"form-control shadow rounded mt-3", placeholder:'Confirm password'%>
+          </div>
+        </div>
+        <div class="form-group row justify-content-center">
+          <%= f.submit(@user.new_record? ? "Sign up" : "Update account", class:"btn btn-lg", :style => "background-color:#DCFF2E", color: "black") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 </div>

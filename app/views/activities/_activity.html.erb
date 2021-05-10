@@ -1,14 +1,17 @@
-<div class="container mt-4">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <% if current_user.activities.count > 0 %>
             <% @activities.each do |activity| %>
-                <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                <div class="col-xxs-12 col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="card text-center shadow mb-5 pink-bg rounded text-white">
                         <div class="card-header">
-                            <h5 class="card-title"><%= link_to activity.title, activity_path(activity), class:"text-white" %></h5>
+                            <h5 class="card-title"><%= link_to activity.name, activity_path(activity), class:"text-white" %></h5>
                         </div>
-                        <div class="card-body bg-white" style="height: 10rem;">
-                            <p class="card-text text-dark"><%= truncate(activity.description, lenght: 25) %></p>
+                        <div class="card-body bg-white" style="height: 11rem;">
+                        <% if activity.avatar.attached? %>
+                <image src="<%=(url_for(activity.avatar))%>", style="height:100px; width:100px; border-radius:180px">
+            <% end %>
+                            <p class="card-text text-dark"><%= truncate(activity.description, lenght: 20) %></p>
                         </div>
                         <div class="card-footer">                    
                             <%= link_to "", activity_path(activity), class:"btn fas fa-eye btn-light"%>
@@ -21,9 +24,10 @@
                 </div>
             <% end %>
             <% else %>
-            <%= link_to "Start creating a new activity!", new_activity_path, class:"btn btn-lg idk", :style => "background-color:#DCFF2E", color: "black" %>
+                <%= link_to "Start creating a new activity!", new_activity_path, class:"btn btn-lg idk", :style => "background-color:#DCFF2E", color: "black" %>
             <% end %>
     </div>  
 </div>
+
 
  

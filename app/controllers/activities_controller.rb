@@ -1,13 +1,12 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, except: [:show, :index]
+  before_action :require_user
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def show    
   end
 
   def index
-    # @activities = Activity.paginate(page: params[:page], per_page: 6)
     @activities = current_user.activities.paginate(page: params[:page], per_page: 6)
   end
 
@@ -47,7 +46,7 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params.require(:activity).permit(:title, :description)
+    params.require(:activity).permit(:title, :description, :name, :date, :distance, :duration, :repetitions, :avatar)
   end
 
   def require_same_user
